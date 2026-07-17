@@ -1,0 +1,23 @@
+# Netlify config for the Inframantra CRM frontend.
+# The current app is a single static HTML file, so `publish` points at the
+# folder that contains it (rename the file to index.html, or set it below).
+# When you migrate to a Vite/React build, switch `command` + `publish` to the build.
+
+[build]
+  publish = "."
+  # command = "npm run build"   # enable when you add a build step
+  # publish = "dist"
+
+# SPA fallback: serve index.html for any client-side route.
+[[redirects]]
+  from = "/*"
+  to = "/index.html"
+  status = 200
+
+# Production security headers (mirrors helmet on the backend).
+[[headers]]
+  for = "/*"
+  [headers.values]
+    X-Frame-Options = "DENY"
+    X-Content-Type-Options = "nosniff"
+    Referrer-Policy = "strict-origin-when-cross-origin"
