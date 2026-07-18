@@ -77,12 +77,19 @@ export async function runSeed({ force = false } = {}) {
           remarks: 'Inbound enquiry — looking for possession-ready inventory.',
           ba: name === 'Sana Qureshi' ? 'Rakesh Properties (BA)' : undefined,
         },
-        // The CRM's own identifier, in the same 'c136201' space the frontend's
-        // uid('c') mints from DB.seq.c. Required and unique on the model, so it
-        // must be set here or every row after the first collides on id:null.
+        // The CRM's own identifier. The 'CUS-' prefix is load-bearing: the
+        // frontend types a record from it (`id.startsWith('CUS-')`), so a
+        // differently-shaped id is not recognised as a customer at all.
+        //
+        // The number deliberately sits far above the frontend's live counter
+        // (DB.seq.c starts at 136200). Seeded rows must never land on an id the
+        // UI will later mint, because POST /api/customers treats a duplicate id
+        // as an idempotent replay and returns the EXISTING row — two different
+        // customers would silently collapse into one.
+        //
         // $setOnInsert, not $set: a re-seed must never renumber an existing
         // customer, or the deals and activities referencing it are orphaned.
-        $setOnInsert: { id: 'c' + (136201 + i) },
+        $setOnInsert: { id: 'CUS-' + (900001 + i) },
       },
       { new: true, upsert: true, setDefaultsOnInsert: true }
     );
