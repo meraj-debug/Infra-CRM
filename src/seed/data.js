@@ -5,10 +5,10 @@
  */
 
 export const USERS = [
-  { username: 'admin',     fullName: 'Rohit Malhotra',          profile: 'System Administrator', role: 'admin',     city: 'All',     manager: null,                    password: '123' },
-  { username: 'meraj',     fullName: 'Meraj Varid',             profile: 'System Administrator', role: 'admin',     city: 'All',     manager: null,                    password: 'Meraj@2026', email: 'meraj@inframantra.com' },
-  { username: 'branch',    fullName: 'Saurabh Singh Kushwah',   profile: 'Branch Head',          role: 'branch',    city: 'All',     manager: null,                    password: '123' },
-  { username: 'saleshead', fullName: 'Vikram Chandna',          profile: 'Sales Head',           role: 'saleshead', city: 'All',     manager: null,                    password: '123' },
+  { username: 'admin',     fullName: 'Rohit Saini',          profile: 'System Administrator', role: 'admin',     city: 'All',     manager: null,                    password: 'newRohit@2026#' },
+  { username: 'meraj',     fullName: 'Meraj Varid',             profile: 'System Administrator', role: 'admin',     city: 'All',     manager: null,                    password: 'newMeraj@2026#', email: 'meraj@inframantra.com' },
+  { username: 'branch',    fullName: 'Saurabh Singh Kushwah',   profile: 'Branch Head',          role: 'branch',    city: 'All',     manager: null,                    password: 'newSaurabh@2026#' },
+  { username: 'saleshead', fullName: 'Himanshu Arora',          profile: 'Sales Head',           role: 'saleshead', city: 'All',     manager: null,                    password: 'newHimanshu@2026#' },
   { username: 'cfo',       fullName: 'Anita Malik',             profile: 'CFO',                  role: 'cfo',       city: 'All',     manager: null,                    password: '123' },
   { username: 'ceo',       fullName: 'Shiwang Suraj',           profile: 'CEO',                  role: 'ceo',       city: 'All',     manager: null,                    password: '123' },
   { username: 'fin',       fullName: 'Priya Nair',              profile: 'Finance / Management', role: 'finance',   city: 'All',     manager: null,                    password: '123' },
