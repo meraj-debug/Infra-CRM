@@ -77,6 +77,12 @@ export async function runSeed({ force = false } = {}) {
           remarks: 'Inbound enquiry — looking for possession-ready inventory.',
           ba: name === 'Sana Qureshi' ? 'Rakesh Properties (BA)' : undefined,
         },
+        // The CRM's own identifier, in the same 'c136201' space the frontend's
+        // uid('c') mints from DB.seq.c. Required and unique on the model, so it
+        // must be set here or every row after the first collides on id:null.
+        // $setOnInsert, not $set: a re-seed must never renumber an existing
+        // customer, or the deals and activities referencing it are orphaned.
+        $setOnInsert: { id: 'c' + (136201 + i) },
       },
       { new: true, upsert: true, setDefaultsOnInsert: true }
     );
