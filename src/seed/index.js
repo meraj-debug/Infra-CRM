@@ -34,7 +34,12 @@ export async function runSeed({ force = false } = {}) {
       {
         $set: {
           fullName: u.fullName, profile: u.profile, role: u.role,
-          city: u.city, email: u.email || `${u.username}@inframantra.com`,
+          // Only a REAL address, never a fabricated one. `sales@inframantra.com`
+          // guessed from a username looks valid, so a password reset would
+          // change the password, report success, and bounce into nothing —
+          // locking the user out. An empty address makes the reset refuse (422)
+          // and tell the admin to add a real one first.
+          city: u.city, email: u.email || '',
         },
         $setOnInsert: { username: u.username, passwordHash },
       },

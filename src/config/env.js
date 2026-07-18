@@ -30,4 +30,19 @@ export const env = {
 
   SEED_ON_BOOT: String(process.env.SEED_ON_BOOT || 'true') === 'true',
   SENTRY_DSN: process.env.SENTRY_DSN || '',
+
+  // --- Outbound mail (password resets) ---
+  // Gmail / Workspace: SMTP_USER is the mailbox and APP_PASSWORD_EMAIL is an
+  // App Password, NOT the account password. Defaults suit Gmail; override for
+  // Zoho, Titan, Outlook, etc.
+  SMTP_HOST: process.env.SMTP_HOST || 'smtp.gmail.com',
+  SMTP_PORT: parseInt(process.env.SMTP_PORT || '465', 10),
+  SMTP_USER: process.env.SMTP_USER || '',
+  // APP_PASSWORD_EMAIL is the name already used in .env; SMTP_PASSWORD is
+  // accepted too so the variable can be named either way.
+  SMTP_PASSWORD: process.env.APP_PASSWORD_EMAIL || process.env.SMTP_PASSWORD || '',
+  SMTP_FROM: process.env.SMTP_FROM || '',
+
+  // Link included in reset e-mails so people land on the right site.
+  FRONTEND_URL: process.env.FRONTEND_URL || '',
 };

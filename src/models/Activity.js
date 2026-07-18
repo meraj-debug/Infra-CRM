@@ -11,6 +11,7 @@ const activitySchema = new mongoose.Schema(
         'TEAM_LEADER_ASSIGNED', 'NOTE_ADDED', 'LOGIN', 'LOGOUT',
         'USER_ACTION', 'API_EVENT',
         'CUSTOMER_CREATED', 'CUSTOMER_UPDATED', 'CUSTOMER_MIGRATED',
+        'PASSWORD_RESET', 'PASSWORD_CHANGED',
       ],
     },
     actor: { type: mongoose.Schema.Types.ObjectId, ref: 'User' },

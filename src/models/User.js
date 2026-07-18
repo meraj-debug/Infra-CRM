@@ -12,6 +12,13 @@ const userSchema = new mongoose.Schema(
     email: { type: String, trim: true, lowercase: true },
     // NOTE: store a HASH here (bcrypt/argon2), never a plaintext password.
     passwordHash: { type: String, required: true, select: false },
+
+    // Password lifecycle, mirroring what the frontend's V6 layer tracks.
+    // `mustChange` is set by an admin reset and cleared when the user picks
+    // their own password.
+    mustChange: { type: Boolean, default: false },
+    pwdChangedAt: { type: Date, default: Date.now },
+    active: { type: Boolean, default: true },
   },
   { timestamps: true }
 );
