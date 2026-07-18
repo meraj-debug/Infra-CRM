@@ -2,6 +2,5 @@ node_modules/
 *.log
 
 # Never commit real secrets — .env.example is the tracked template.
-.env
-.env.*
+
 !.env.example
