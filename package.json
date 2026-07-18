@@ -6,9 +6,12 @@
   "main": "src/server.js",
   "scripts": {
     "start": "node src/server.js",
+    "test": "node test/customers.test.mjs && node test/dualwrite.test.mjs",
     "dev": "node --watch src/server.js",
     "seed": "node src/seed/run.js",
-    "seed:force": "node src/seed/run.js --force"
+    "seed:force": "node src/seed/run.js --force",
+    "backfill:customers": "node src/scripts/backfill-customers.js",
+    "backfill:customers:write": "node src/scripts/backfill-customers.js --write"
   },
   "dependencies": {
     "@sentry/node": "^8.20.0",

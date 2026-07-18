@@ -10,6 +10,7 @@ const activitySchema = new mongoose.Schema(
         'DEAL_CREATED', 'DEAL_UPDATED', 'STAGE_CHANGED', 'RM_ASSIGNED',
         'TEAM_LEADER_ASSIGNED', 'NOTE_ADDED', 'LOGIN', 'LOGOUT',
         'USER_ACTION', 'API_EVENT',
+        'CUSTOMER_CREATED', 'CUSTOMER_UPDATED', 'CUSTOMER_MIGRATED',
       ],
     },
     actor: { type: mongoose.Schema.Types.ObjectId, ref: 'User' },

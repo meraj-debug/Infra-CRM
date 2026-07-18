@@ -12,6 +12,7 @@ import { notFound, errorHandler } from './middleware/error.js';
 
 import healthRoutes from './routes/health.js';
 import dealRoutes from './routes/deals.js';
+import customerRoutes from './routes/customers.js';
 import stateRoutes from './routes/state.js';
 import authRoutes from './routes/auth.js';
 import seedRoutes from './routes/seed.js';
@@ -58,12 +59,13 @@ app.use('/api', rateLimit({ windowMs: 60_000, max: 240, standardHeaders: true, l
 app.get('/', (req, res) => res.json({
   name: 'Inframantra CRM API',
   status: 'ok',
-  endpoints: ['/health', '/api/auth/login', '/api/state/:key', '/api/deals', '/api/seed'],
+  endpoints: ['/health', '/api/auth/login', '/api/state/:key', '/api/customers', '/api/deals', '/api/seed'],
 }));
 app.use('/health', healthRoutes);
 app.use('/api/auth', authRoutes);
 app.use('/api/state', stateRoutes);
 app.use('/api/deals', dealRoutes);
+app.use('/api/customers', customerRoutes);
 app.use('/api/seed', seedRoutes);
 
 // --- 404 + error handling ---
