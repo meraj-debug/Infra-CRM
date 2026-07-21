@@ -29,6 +29,10 @@ function getTransport() {
       port: env.SMTP_PORT,
       // 465 is implicit TLS; 587 upgrades with STARTTLS.
       secure: env.SMTP_PORT === 465,
+      // Force IPv4. Some hosts resolve smtp.gmail.com to an IPv6 address they
+      // can't actually route to, which fails as `connect ENETUNREACH …:465`.
+      // Gmail is fully reachable over IPv4, so pin the socket family to 4.
+      family: 4,
       auth: {
         user: env.SMTP_USER,
         // Google shows app passwords in 4-character groups. The spaces are
