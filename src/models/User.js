@@ -10,6 +10,7 @@ const userSchema = new mongoose.Schema(
     manager: { type: mongoose.Schema.Types.ObjectId, ref: 'User', default: null },
     city: { type: String, default: 'All' },
     email: { type: String, trim: true, lowercase: true },
+    mobile: { type: String, trim: true, default: '' },
     // NOTE: store a HASH here (bcrypt/argon2), never a plaintext password.
     passwordHash: { type: String, required: true, select: false },
 

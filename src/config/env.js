@@ -19,6 +19,28 @@ export const env = {
   JWT_SECRET: process.env.JWT_SECRET,
   JWT_EXPIRES_IN: process.env.JWT_EXPIRES_IN || '12h',
 
+  // --- Access + refresh tokens (Module 1.3) ---
+  // The ACCESS token is sent as `Authorization: Bearer`. Kept at 12h so the
+  // wrapped legacy app (which stores this token and has no refresh logic of its
+  // own) keeps working; the React client still silently refreshes on 401.
+  ACCESS_EXPIRES_IN: process.env.ACCESS_EXPIRES_IN || '12h',
+  REFRESH_EXPIRES_IN: process.env.REFRESH_EXPIRES_IN || '7d',
+  // Separate secret for refresh tokens. Falls back to a derived value so it
+  // still works without extra config, but set it explicitly in production.
+  JWT_REFRESH_SECRET: process.env.JWT_REFRESH_SECRET || (process.env.JWT_SECRET + ':refresh'),
+  // Password-reset link token lifetime (Module 1.2) — 10 minutes as required.
+  RESET_EXPIRES_IN: process.env.RESET_EXPIRES_IN || '10m',
+
+  // Cookie behaviour for the refresh token. In production (https, cross-site
+  // frontend) we need SameSite=None + Secure. In dev (localhost) Lax works.
+  COOKIE_SECURE:
+    process.env.COOKIE_SECURE != null
+      ? process.env.COOKIE_SECURE === 'true'
+      : process.env.NODE_ENV === 'production',
+  COOKIE_SAMESITE:
+    process.env.COOKIE_SAMESITE ||
+    (process.env.NODE_ENV === 'production' ? 'none' : 'lax'),
+
   // Comma-separated allowed origins. Supports exact origins and "*" wildcard.
   CORS_ORIGINS: list(process.env.CORS_ORIGINS, 'http://localhost:5173'),
 
