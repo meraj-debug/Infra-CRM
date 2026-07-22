@@ -33,6 +33,12 @@ function getTransport() {
       // can't actually route to, which fails as `connect ENETUNREACH …:465`.
       // Gmail is fully reachable over IPv4, so pin the socket family to 4.
       family: 4,
+      // Fail fast instead of hanging ~2 min when the network path to the SMTP
+      // server stalls (flaky egress / firewall). The caller treats a failed
+      // send as non-fatal, so a quick failure is much better than a long hang.
+      connectionTimeout: 15000,   // TCP connect must complete within 15s
+      greetingTimeout: 10000,     // server 220 greeting within 10s
+      socketTimeout: 30000,       // no data for 30s → give up
       auth: {
         user: env.SMTP_USER,
         // Google shows app passwords in 4-character groups. The spaces are

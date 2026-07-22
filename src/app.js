@@ -13,7 +13,9 @@ import { notFound, errorHandler } from './middleware/error.js';
 import healthRoutes from './routes/health.js';
 import dealRoutes from './routes/deals.js';
 import customerRoutes from './routes/customers.js';
+import projectRoutes from './routes/projects.js';
 import userRoutes from './routes/users.js';
+import uploadRoutes from './routes/uploads.js';
 import stateRoutes from './routes/state.js';
 import authRoutes from './routes/auth.js';
 import seedRoutes from './routes/seed.js';
@@ -67,7 +69,9 @@ app.use('/api/auth', authRoutes);
 app.use('/api/state', stateRoutes);
 app.use('/api/deals', dealRoutes);
 app.use('/api/customers', customerRoutes);
+app.use('/api/projects', projectRoutes);
 app.use('/api/users', userRoutes);
+app.use('/api/uploads', uploadRoutes);
 app.use('/api/seed', seedRoutes);
 
 // --- 404 + error handling ---

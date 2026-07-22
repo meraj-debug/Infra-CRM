@@ -67,4 +67,11 @@ export const env = {
 
   // Link included in reset e-mails so people land on the right site.
   FRONTEND_URL: process.env.FRONTEND_URL || '',
+
+  // --- Cloudinary (asset uploads) ---
+  // The API secret is used ONLY to sign upload requests server-side; it never
+  // goes to the browser. cloud_name is public (it appears in every asset URL).
+  CLOUDINARY_CLOUD_NAME: process.env.CLOUDINARY_CLOUD_NAME || '',
+  CLOUDINARY_API_KEY: process.env.CLOUDINARY_API_KEY || '',
+  CLOUDINARY_API_SECRET: process.env.CLOUDINARY_API_SECRET || '',
 };

@@ -152,6 +152,22 @@ router.patch('/:id', asyncHandler(async (req, res) => {
   res.json({ data: cust2, changed: changes.map((c) => c.field) });
 }));
 
+// DELETE /api/customers/:id — remove a customer (scoped, so you can only delete
+// what you're allowed to see). Ids are unique, so this removes exactly one row.
+router.delete('/:id', asyncHandler(async (req, res) => {
+  const cust = await Customer.findOne({ id: req.params.id }).lean();
+  if (!cust) return res.status(404).json({ error: 'Customer not found' });
+  if (!(await canSeeCustomer(req.user, cust))) {
+    return res.status(404).json({ error: 'Customer not found' });
+  }
+  await Customer.deleteOne({ id: req.params.id });
+  await logActivity({
+    type: 'CUSTOMER_DELETED', actor: req.user.id, actorName: req.user.fullName,
+    entity: 'customer', entityId: cust._id, detail: { id: cust.id, name: cust.name },
+  });
+  res.json({ ok: true, id: req.params.id });
+}));
+
 // POST /api/customers/:id/:trail — append to notes/activities/comms/chatter.
 // $push, so concurrent appends from different users all survive.
 const TRAILS = new Set(['notes', 'activities', 'comms', 'chatter']);
